@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<head>
+<!--style type="text/css" src="~/../../lib/bootstrap.min.css"></style-->
+<!--script type="text/javascript" src="~/../../lib/bootstrap.min.js"></script-->
+<!--style type="text/css">@import url("~/../../lib/foundation.min.css")</style-->
+<style type="text/css">@import url("assets/css/home.css")</style>
+<script type="text/javascript" src="~/../../lib/angular.min.js"></script>
+<script type="text/javascript" src="main.js"></script>
+<script type="text/javascript" src="SuggestionsFactory.js"></script>
+<script type="text/javascript" src="KeypadController.js"></script>
+
+</head>
+<body ng-app="mobileApp" ng-controller="KeyPadCtrl">
+<div class="numpad">
+	<div class="left_wrapper">
+		<button ng-click="deleteKey($event)" class="key">C</button>
+		<button class="key nav home"><img ng-src="assets/images/home-icon.png"/></button>
+		<button class="key nav search" ng-click="getSearchResults()"><img ng-src="assets/images/search-icon.png"/></button>
+	</div>
+	<div class="right_wrapper">
+		<input type="text" class="display_keys" value="{{keyEnteries.displayValue}}" ng-readonly="true"/>
+		<div class="keypad_wrapper" ng-click="keyPressed($event)">
+			<button class="key" ng-repeat="key in keypad">{{key.key}}</button>
+		</div>
+	</div>
+</div>
+<textarea class="display_suggestions">{{suggestions}}</textarea>
+
+<form id="cse-search-box" action="http://google.com/cse" style="display: none">
+	  <input type="hidden" name="cx" value="017163676711090849159:cbgayr8iyb4" />
+	  <input type="hidden" name="ie" value="UTF-8" />
+	  <input type="text" name="q" id="searchText" size="31" />
+	  <input type="submit" name="sa" value="Search" />
+ </form>
+</body>
+</html>
