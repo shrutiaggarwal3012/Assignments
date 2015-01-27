@@ -1,60 +1,46 @@
-requests = [];
-var dummyRequest ;
-dummyRequest = $.ajax({
-					url:"http://ip.jsontest.com/",
-					dataType: 'jsonp',
-					type:"GET",
-					success:function(data)
-					{
-						alert("first request completed");
-					}
+$(document).ready(function(){
+	AsynTask.initialize();
+});
 
-				});
-requests.push(dummyRequest);
-dummyRequest = $.ajax({
-	url:"http://echo.jsontest.com/key/value/one/two",
-	 dataType: 'jsonp',
-	type:"GET",
-	success:function(data)
+AsynTask = 
+(function()
+{
+	'use strict';
+	var  initialize = function()
 	{
-		alert("second request complted");
+		$('#start').click(function(){
+			startAsynctask();
+		});
 	}
 
-})
-
-requests.push(dummyRequest);
-dummyRequest = $.ajax({
-	url:"http://validate.jsontest.com/?json=%7B%22key%22:%22value%22%7D",
-	 dataType: 'jsonp',
-	type:"GET",
-	success:function(data)
+	function startAsynctask() 
 	{
-		alert("third request completed");
+		var requests = [];
+		requests.push(sendAsyncRequest("http://ip.jsontest.com/", "first request completed"));
+		requests.push(sendAsyncRequest("http://echo.jsontest.com/key/value/one/two", "second request completed"));
+		requests.push(sendAsyncRequest("http://validate.jsontest.com/?json=%7B%22key%22:%22value%22%7D", "third request completed"));
+		
+		$.when.apply($, requests).done(function(){alert("all request completed");});
 	}
 
-})
-requests.push(dummyRequest);
-/*
-loadInfo: function(){
-    var room = ['room1','room2','room3'],
-    dates = [],
-    prices = [],
-    requests = [];
+	function sendAsyncRequest(url,message)
+	{
+	
+		var	dummyRequest = 
+		$.ajax({
+			url:url,
+			dataType: 'jsonp',
+			type:"GET",
+			success:function(data)
+			{
+				alert(message);
+			}
+		}); 
+		return dummyRequest;
+	}
 
-    $.each(booking.rooms, function(key, room_name) {
-        var aRequest;
+	var AsynTask  = { initialize : initialize } ;
+	return AsynTask;
+})();
 
-        aRequest = $.getJSON('/get_info.php?room='+room_name, function(data) {
-            dates[room_name] = data;
-        });
-        requests.push(aRequest);
-
-        aRequest = $.getJSON('/get_info.php?room='+room_name+'&prices', function(data) {
-            prices[room_name] = data;
-        });
-        requests.push(aRequest);
-
-    })*/
-
-    $.when.apply($, requests).done(function(){alert("completed");console.log("Hello");});
 

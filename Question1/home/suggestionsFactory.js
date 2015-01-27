@@ -4,7 +4,6 @@
     .factory('suggestionFactory',[suggestionFactory]);
 
     function suggestionFactory(){ 
-
         var CustomCounter = function(min, max) {
             this.min = min.slice(0)
             this.max = max.slice(0)
@@ -34,7 +33,7 @@
 
         var PhoneNumber = function(phone_number) {
             this.phone_number = phone_number
-            this.combinations = []
+            this.combinations = ''
         }
 
         PhoneNumber.keypad = [
@@ -63,7 +62,7 @@
                 combination += this.get_combination_by_digit(phone_number_digit)[indexes[i]]
             }
 
-            this.combinations.push(combination)
+            this.combinations += combination+',   ';
         }
 
         PhoneNumber.prototype.update_combinations = function() {

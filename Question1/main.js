@@ -1,1 +1,1 @@
-angular.module('mobileApp',[]);
+angular.module('mobileApp',['ui.router']);

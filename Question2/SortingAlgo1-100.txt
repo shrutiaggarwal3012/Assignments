@@ -1,0 +1,36 @@
+Problem :
+An array of integers 1-100 in an unsorted order. Write a sort algorithm manually that sorts the numbers in the quickest manner. Estimate the time complexity of the algorithm written in order of n.
+
+Initial Condition :
+Minimum number in sorted array or the first number in array is = 1
+Maximum number in sorted array or the last number in array is = 100
+
+
+Step 1:	Initialize temp array with 101 elements(temp[101]) and initialize every element with zero.
+
+Step 2: Iterate through the input array and for example if first number is 27 the put temp[27] = 1
+
+
+for example :
+
+		input[] = {4,5,1,2,4,87,43,12};
+		
+		temp[101] = {0, 0, 0, 0, ...} 
+		(till 101 elements so that count of number of elements will be equal to the position in temp array)
+
+Step 3: When we iterate through input array we set values in temp array as
+
+		temp[1] = 1 (1 exist once in input[])
+		temp[2] = 1 (2 exist once in input[])
+		temp[4] = 2 (4 exist two times in input[])
+		temp[5] = 1 (5 exist once in input[]) 
+		temp[12] = 1 (12 exist once in input[]) 
+		temp[43] = 1 (43 exist once in input[])
+		temp[87] = 1 (87 exist once in input[])
+
+Step 4: Then we iterate over temp[] and get the final result as
+
+		result[] = {1,2,4,4,5,12,43,87}  
+
+
+Time complexity : O(n) because it will be linear in time, two times iterating over for loop , first we iterate over input[] then on temp[].  
